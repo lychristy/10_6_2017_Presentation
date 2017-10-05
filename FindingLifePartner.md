@@ -83,7 +83,7 @@ genderdata<-aggregate(sindata$PWGTP,list(sindata$SEX),FUN=sum)
 names(genderdata)<-c('SEX','Count') # returns female with 40110995 and male with 39512549
 ```
 
-![](doc/image/singlePie.png) 
+![](/Users/yiliu/Documents/GitHub/10_6_2017_Presentation/singlePie.png) 
 
 </p>We can see that women slightly outnumber men. Next, we would like to see their age distribution. </p>
 
@@ -95,8 +95,6 @@ genderageplot<-ggplot(sindata,aes(x=SEX, y=AGEP, fill=as.factor(SEX)))+geom_boxp
 ```
 
 ![](doc/image/singleAge.png)
-
-<p>we can see women performs generally better then men in finding a job. The unemployment rate drops as the age increase. If you are looking for a partner under 30 years old and you do not want him/her without a job, then you are in the dangerous zone</p>
 
 <p>It is clear that median age of single women are 5 years older than single men. If you are a lady who want to find a boyfriend under 30, then half of the single gentlemen is waiting for you. If you are a gentleman who look for ladies under 25 then 25% of total single ladies is waiting for you. </p>
 
