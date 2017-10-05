@@ -49,12 +49,12 @@ rm(pop1, pop2)
 
 ``` r
 #excluding married people, and missing values
-sindata = tbl_df(pop4)
-sindata = sindata %>%
+sindata<-tbl_df(pop4)
+sindata<-sindata %>%
   na.omit() %>%
   filter(MSP %in% c('Widowed','Divorced','Separated','Never married')) %>% #code 1&2 are married
   group_by(SEX)
-pop4 = pop4 %>%
+pop4<-pop4 %>%
   na.omit()
 ```
 
