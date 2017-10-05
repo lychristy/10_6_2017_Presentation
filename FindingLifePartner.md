@@ -1,6 +1,6 @@
 ---
 title: "Finding Life Partner"
-author: "Ruixiong Shi, Danmo Wang, Liu Yi, Rong Wang, Yue Shen Gu"
+author: "Ruixiong Shi, Danmo Wang, Yi Liu, Rong Wang, Yue Shen Gu"
 date: "January 27, 2016"
 ---
 
@@ -49,11 +49,13 @@ rm(pop1, pop2)
 
 ``` r
 #excluding married people, and missing values
-sindata<-tbl_df(pop4)
-sindata<-sindata %>%
+sindata = tbl_df(pop4)
+sindata = sindata %>%
   na.omit() %>%
   filter(MSP %in% c('Widowed','Divorced','Separated','Never married')) %>% #code 1&2 are married
   group_by(SEX)
+pop4 = pop4 %>%
+  na.omit()
 ```
 
 # 2 General information of single population
@@ -65,9 +67,7 @@ sindata<-sindata %>%
 <p>First of all we want to know the percentage of the single people all over the state. </p>
 
 ``` r
-#Compute the percentage of weighted single people over weighted population
-pop4 = pop4 %>%
-  na.omit()
+#Compute the percentage of weighted single people over weighted population   
 sum(sindata$PWGTP)/sum(pop4$PWGTP)
 ```
     ## [1] 0.2515322
