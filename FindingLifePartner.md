@@ -83,7 +83,7 @@ genderdata<-aggregate(sindata$PWGTP,list(sindata$SEX),FUN=sum)
 names(genderdata)<-c('SEX','Count') # returns female with 40110995 and male with 39512549
 ```
 
-![](/Users/yiliu/Documents/GitHub/10_6_2017_Presentation/singlePie.png) 
+![](pic/singlePie.png) 
 
 </p>We can see that women slightly outnumber men. Next, we would like to see their age distribution. </p>
 
