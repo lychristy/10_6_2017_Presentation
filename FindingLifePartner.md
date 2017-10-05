@@ -94,7 +94,7 @@ names(genderdata)<-c('SEX','Count') # returns female with 40110995 and male with
 genderageplot<-ggplot(sindata,aes(x=SEX, y=AGEP, fill=as.factor(SEX)))+geom_boxplot()+ggtitle("Comparing age of single people in US by gender") + scale_fill_discrete(name = "Gender")+xlab("Gender")+ylab("Age") + scale_y_continuous(limits=c(0,100))+theme_bw()
 ```
 
-![](doc/image/singleAge.png)
+![](pic/singleAge.png)
 
 <p>It is clear that median age of single women are 5 years older than single men. If you are a lady who want to find a boyfriend under 30, then half of the single gentlemen is waiting for you. If you are a gentleman who look for ladies under 25 then 25% of total single ladies is waiting for you. </p>
 
@@ -115,7 +115,7 @@ names(unempl2)<-c('Age','Sex','UnemplCount')
 unempl2$id<-paste0(unempl2$Age,unempl2$Sex)
 ```
 
-![](doc/image/unemplAge.png)
+![](pic/unemplAge.png)
 
 <p>we can see women perform generally better then men in finding a job. The unemployment rate drops as the age increase. If you are looking for a partner under 30 years old and you do not want him/her without a job, then you are in the dangerous zone</p>
 
@@ -138,7 +138,7 @@ popudata<-aggregate(popudata$PWGTP,by=list(popudata$WAGP2,popudata$SEX),FUN=sum)
 names(popudata)<-c('WAGP','SEX','PWGTP')
 ```
 
-![](doc/image/salary.png)
+![](pic/salary.png)
 
 <<p>From the above plot, the low paid group (under 20k annual), for both female and male, dominate all other groups. </p>
 
@@ -156,7 +156,7 @@ per_edu$SCHL[per_edu$SCHL == 23] <- "Professional degree beyond a bachelor's deg
 per_edu$SCHL[per_edu$SCHL == 24] <- "Doctorate degree"
 ```
 
-![](doc/image/education.png)
+![](pic/education.png)
 
 <p>More than half of single people do not have a college degree. </p>
 
@@ -202,7 +202,7 @@ ichoropleth(Perc ~ State,legend=T,pal='YlOrRd',data=sugarDaddy4)
 
 <b>Expected percentage of single males earning more than 100K annually</b>
 
-<p align="left"><img src="doc/image/sugarDaddyPerc.png" ></p>
+<p align="left"><img src="pic/sugarDaddyPerc.png" ></p>
 
 ``` r 
 ichoropleth(ExpectedCount2015 ~ State,legend=T,pal='YlOrRd',data=sugarDaddy4)
@@ -210,7 +210,7 @@ ichoropleth(ExpectedCount2015 ~ State,legend=T,pal='YlOrRd',data=sugarDaddy4)
 
 <b>Expected total number of single males earning more than 100K annually</b>
 
-<p align="left"><img src="doc/image/sugarDaddyNum.png" ></p>
+<p align="left"><img src="pic/sugarDaddyNum.png" ></p>
 
 <p>It seems like New York, California and Massachuset are the best states for hunting them. Great! </p>
 
@@ -284,7 +284,7 @@ ichoropleth(Perc ~ State,data=pgirl4,pal = 'PuRd')
 
 <b>Expected percentage of single females younger between 16-29 years old, graduated from college, and have a job</b>
 
-<p align="left"><img src="doc/image/perfectGirlPerc.png" ></p>
+<p align="left"><img src="pic/perfectGirlPerc.png" ></p>
 
 ``` r 
 ichoropleth(ExpectedCount2015 ~ State,data=pgirl4,pal = 'PuRd')
@@ -292,7 +292,7 @@ ichoropleth(ExpectedCount2015 ~ State,data=pgirl4,pal = 'PuRd')
 
 <b>Expected total number of single females younger between 16-29 years old, graduated from college, and have a job</b>
 
-<p align="left"><img src="doc/image/perfectGirlNum.png" ></p>
+<p align="left"><img src="pic/perfectGirlNum.png" ></p>
 
 <p>New York, California and Massachuset are great choice for me and I have more options such as Pennsylvania, Illinois and Nevada</p>
 
