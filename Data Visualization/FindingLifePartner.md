@@ -96,7 +96,7 @@ genderageplot<-ggplot(sindata,aes(x=SEX, y=AGEP, fill=as.factor(SEX)))+geom_boxp
 
 ![](pic/singleAge.png)
 
-<p>It is clear that median age of single women are 5 years older than single men. If you are a lady who want to find a boyfriend under 30, then half of the single gentlemen is waiting for you. If you are a gentleman who look for ladies under 25 then 25% of total single ladies is waiting for you. </p>
+<p>It is clear that median age of single women are 5 years older than single men.  </p>
 
 <b><i>The next question is, are they good husband/wife for you? </i>.</b>
 
