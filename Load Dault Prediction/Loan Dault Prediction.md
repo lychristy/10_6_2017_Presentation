@@ -4,9 +4,10 @@
 -   [4. Naive Bayes prediction and
     evaulation](#naive-bayes-prediction-and-evaulation)
 
-<br/> This project creates a statistical model to predict if a customer
-will default or fully pay off a loan, and also the probability of being
-in each status. <br/><br/>
+Title: Loan Default Prediction<br/> Author: Yi Liu<br/> Date: Dec 15,
+2017<br/> <br/><br/> This project creates a statistical model to predict
+if a customer will default or fully pay off a loan, and also the
+probability of being in each status. <br/><br/>
 
 ### 1. Import data and data cleaning
 
@@ -145,6 +146,11 @@ There are 5 features having missing values. <br/> <br/>
 
 #### 2.1 Annual income
 
+    summary(loandata$annual_inc)
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##    4080   44000   60000   70980   85000 8706582
+
     quantile(loandata$annual_inc, probs = c(0.01, 0.99))
 
     ##     1%    99% 
@@ -153,9 +159,13 @@ There are 5 features having missing values. <br/> <br/>
     hist(subset(loandata,18000<annual_inc & annual_inc<230000)$annual_inc,breaks = 50, main = "Annual Income", xlab= "Annual Income")
 
 ![](Yi_Liu,_Data_Challenge_files/figure-markdown_strict/unnamed-chunk-5-1.png)
-<br/>Annual income for most people are from 18,000 to 230,000 dollar.
-After removing income which are extremely low and high, then we find
-distribution is right-skewed and concentrated on the left of the figure.
+
+    hist(subset(loandata,18000<annual_inc & annual_inc<230000)$annual_inc,breaks = 50, main = "Annual Income", xlab= "Annual Income")
+
+![](result3.png) <br/>Annual income for most people are from 18,000 to
+230,000 dollar. After removing income which are extremely low and high,
+then we find distribution is right-skewed and concentrated on the left
+of the figure.
 
 #### 2.2 Purpose
 
@@ -167,12 +177,8 @@ distribution is right-skewed and concentrated on the left of the figure.
              xaxis = list(title = "Purpose", tickfont = list(size=9),tickangle = -20,exponentformat = "E"),
              yaxis = list(title = "Count"))
 
-<!--html_preserve-->
-
-<script type="application/json" data-for="htmlwidget-f7a43fdd0832ade82a3b">{"x":{"visdat":{"5bec79661b37":["function () ","plotlyVisDat"]},"cur_data":"5bec79661b37","attrs":{"5bec79661b37":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Loan Purpose","xaxis":{"domain":[0,1],"automargin":true,"title":"Purpose","tickfont":{"size":9},"tickangle":-20,"exponentformat":"E","type":"category","categoryorder":"array","categoryarray":["debt_consolidation","credit_card","home_improvement","other","major_purchase","small_business","car","medical","moving","wedding","house","vacation","educational","renewable_energy"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"data":[{"x":["car","credit_card","debt_consolidation","educational","home_improvement","house","major_purchase","medical","moving","other","renewable_energy","small_business","vacation","wedding"],"y":[1314,18992,59006,120,5750,660,2321,1153,816,5616,90,2060,629,671],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
-<!--/html_preserve-->
-<br/> 59.5% of curstomers applied loan for `debt_consolidation` and
-19.1% applied for `credit_card`.
+![](result5.png) <br/> 59.5% of curstomers applied loan for
+`debt_consolidation` and 19.1% applied for `credit_card`.
 
 #### 2.3 Employment length
 
@@ -184,10 +190,8 @@ distribution is right-skewed and concentrated on the left of the figure.
              xaxis = list(title = "Employment Length", tickfont = list(size=9),tickangle = -20,exponentformat = "E"),
              yaxis = list(title = "Count"))
 
-<!--html_preserve-->
+![](result4.png)
 
-<script type="application/json" data-for="htmlwidget-08dea273b8f64910f5ba">{"x":{"visdat":{"5bec30107f97":["function () ","plotlyVisDat"]},"cur_data":"5bec30107f97","attrs":{"5bec30107f97":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Employment Length in Years","xaxis":{"domain":[0,1],"automargin":true,"title":"Employment Length","tickfont":{"size":9},"tickangle":-20,"exponentformat":"E","type":"category","categoryorder":"array","categoryarray":["10+ years","2 years","< 1 year","3 years","5 years","1 year","4 years","6 years","7 years","8 years","n/a","9 years"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"data":[{"x":["< 1 year","1 year","10+ years","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","n/a"],"y":[8364,6561,29834,9216,7903,6288,6889,5725,5542,4723,3757,4396],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
-<!--/html_preserve-->
 `10+ years` group has more than twice customers than other groups. <br/>
 
 ### 3. Feature selection
@@ -204,34 +208,21 @@ Remove all rows have missing values.
 <br/> Implement random forest to indentify feature importance.
 
     output.rf = randomForest(loan_status ~ ., data = rf_train[,-5],importance=TRUE)
-    output.rf
 
-    ## 
-    ## Call:
-    ##  randomForest(formula = loan_status ~ ., data = rf_train[, -5],      importance = TRUE) 
-    ##                Type of random forest: classification
-    ##                      Number of trees: 500
-    ## No. of variables tried at each split: 4
-    ## 
-    ##         OOB estimate of  error rate: 36.53%
-    ## Confusion matrix:
-    ##             charged off Fully Paid class.error
-    ## charged off        1352       2745   0.6700024
-    ## Fully Paid          908       4995   0.1538201
+![](result6.png)
 
     varImpPlot(output.rf,type = 2)
 
-![](Yi_Liu,_Data_Challenge_files/figure-markdown_strict/unnamed-chunk-9-1.png)
-<br/>`dti` is the most important feature, followed by `id`.<br/> `id` is
-unique for each cutomer and can be any numbers or symbols.Gernelly, it
-should not related to results. For some finance companies offering
-loans, when they are in startup stage, in order to develop their
-business, they would target their customers in specific area, such as
-successful people or white-collar. So it causes the distrimination in
-early data. That is the reason `id` will related to results in our case.
-But we still need to move this feature.<br/> In graph, some features are
-not that related to results, so we choose top 11 features in our
-prediction. <br/><br/>
+![](result7.png) <br/>`dti` is the most important feature, followed by
+`id`.<br/> `id` is unique for each cutomer and can be any numbers or
+symbols.Gernelly, it should not related to results. For some finance
+companies offering loans, when they are in startup stage, in order to
+develop their business, they would target their customers in specific
+area, such as successful people or white-collar. So it causes the
+distrimination in early data. That is the reason `id` will related to
+results in our case. But we still need to move this feature.<br/> In
+graph, some features are not that related to results, so we choose top
+11 features in our prediction. <br/><br/>
 
     pre = predict(output.rf,rf_test[,-5] )
     par(mfrow=c(2,2))
@@ -244,7 +235,7 @@ prediction. <br/><br/>
     #perf = performance (pred, measure = 'tpr', x.measure = "fpr")
     #plot(perf) + abline(a=0, b=1, col = 'red')
 
-![](Yi_Liu,_Data_Challenge_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](Yi_Liu,_Data_Challenge_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 ### 4. Naive Bayes prediction and evaulation
 

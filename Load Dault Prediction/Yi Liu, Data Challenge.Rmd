@@ -7,7 +7,10 @@ output:
     toc: true
 always_allow_html: yes
 ---
-<br/>
+Title: Loan Default Prediction<br/>
+Author: Yi Liu<br/>
+Date: Dec 15, 2017<br/>
+<br/><br/>
 This project creates a statistical model to predict if a customer will default or fully pay off a loan, and also the probability of being in each status.
 <br/><br/>
 
@@ -51,13 +54,19 @@ There are 5 features having missing values.
 ### 2. Exploratory Data Analysis
 #### 2.1 Annual income
 ```{r,warning=FALSE,message=FALSE}
+summary(loandata$annual_inc)
 quantile(loandata$annual_inc, probs = c(0.01, 0.99))
 hist(subset(loandata,18000<annual_inc & annual_inc<230000)$annual_inc,breaks = 50, main = "Annual Income", xlab= "Annual Income")
 ```
+
+```{r,message=FALSE,warning=FALSE, eval=FALSE}
+hist(subset(loandata,18000<annual_inc & annual_inc<230000)$annual_inc,breaks = 50, main = "Annual Income", xlab= "Annual Income")
+```
+![](result3.png)
 <br/>Annual income for most people are from 18,000 to 230,000 dollar. After removing income which are extremely low and high, then we find distribution is right-skewed and concentrated on the left of the figure.   
 
 #### 2.2 Purpose
-```{r, message=FALSE, warning=FALSE}
+```{r,message=FALSE,warning=FALSE, eval=FALSE}
 purpose_data = data.frame(table(loandata$purpose))
 level = purpose_data[order(-purpose_data$Freq),1]
 purpose_data$Var1 = factor(purpose_data$Var1, levels = level)
@@ -68,10 +77,11 @@ plot_ly(purpose_data, x = ~Var1, y = ~Freq, type = 'bar') %>%
 
 ```
 
+![](result5.png)
 <br/> 59.5% of curstomers applied loan for `debt_consolidation` and 19.1% applied for `credit_card`.    
 
 #### 2.3 Employment length
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE, eval=FALSE}
 emp_data = data.frame(table(loandata$emp_length))
 level = emp_data[order(-emp_data$Freq),1]
 emp_data$Var1 = factor(emp_data$Var1, levels = level)
@@ -81,6 +91,7 @@ plot_ly(emp_data, x = ~Var1, y = ~Freq, type = 'bar') %>%
          yaxis = list(title = "Count"))
 
 ```
+![](result4.png)
 
 `10+ years` group has more than twice customers than other groups.
 <br/>
@@ -100,9 +111,13 @@ rf_test = rf_data[-train_ind,]
 Implement random forest to indentify feature importance.
 ```{r, message=FALSE, warning=FALSE}
 output.rf = randomForest(loan_status ~ ., data = rf_train[,-5],importance=TRUE)
-output.rf
+```
+![](result6.png)
+
+```{r,message=FALSE,warning=FALSE, eval=FALSE}
 varImpPlot(output.rf,type = 2)
 ```
+![](result7.png)
 <br/>`dti` is the most important feature, followed by `id`.<br/>
 `id` is unique for each cutomer and can be any numbers or symbols.Gernelly, it should not related to results. For some finance companies offering loans, when they are in startup stage, in order to develop their business, they would target their customers in specific area, such as successful people or white-collar. So it causes the distrimination in early data. That is the reason `id` will related to results in our case. But we still need to move this feature.<br/>
 In graph, some features are not that related to results, so we choose top 11 features in our prediction.
