@@ -3,8 +3,9 @@ title: "Loan Default Prediction"
 author: Yi Liu
 date: Dec 15, 2017
 output:
-  html_document:
+  md_document:
     toc: true
+always_allow_html: yes
 ---
 <br/>
 This project creates a statistical model to predict if a customer will default or fully pay off a loan, and also the probability of being in each status.
@@ -21,7 +22,7 @@ library(caret)
 library(ROCR)
 library(dplyr)
 library(descr)
-train = read_csv("~/Downloads/Data_challenge/train.csv")
+train = read_csv("C:/Users/yliu/Downloads/train.csv")
 loandata = data.frame(train)
 ```
 #### 1.2 Check structure of data
@@ -163,22 +164,3 @@ For some P2P companies offering loans, they have both investors and borrowers. H
 * Notes and further suggestions:
     + 1. In our case, we choose 0.6 as threshold. Different thresholds have different accuracies. Which cut point we should choose depends on our data and goal. Threshold does not affect classification or probabilities.
     + 2. We only got 60% accuracy in our prediction for Naive Bayes and 63% for Random Forest. We can add more information to improve our results, such as credit score (FICO) or score grade.
-
-
-### 5. Code for test.csv and submission_file.csv
-#### 5.1 Prediction in test.csv 
-```{r,message=FALSE,warning=FALSE,eval=FALSE}
-test = read_csv("~/Downloads/Data_challenge/test.csv")
-test[sapply(test, is.character)] = lapply(test[sapply(test, is.character)], as.factor)
-pred_test = predict(classifier, test, type="raw")
-pred_test = data.frame(cbind(test$id, pred_test))
-names(pred_test)[1] = "id"
-```
-
-#### 5.2 Merge test.csv and submission_file.csv
-```{r,message=FALSE,warning=FALSE,eval=FALSE}
-submission_file = read_csv("~/Downloads/Data_challenge/submission_file.csv")
-submission_file = merge(submission_file, pred_test, by.x = "id", by.y = "id",all.x=TRUE, sort=FALSE)
-write.csv(submission_file, "~/Downloads/Data_challenge/submission_file2.csv",row.names = FALSE)
-```
-
